@@ -130,3 +130,14 @@ class Solution51:
         p,r,c = [None]*n,list(),[None]*n
         backtrack(0)
         return r
+
+def test146(solutionClass, operation, value, answer=None):
+    sol = solutionClass(value[0][0])
+    for i in range(1, len(operation)):
+        if operation[i]=='put':
+            sol.put(value[i][0], value[i][1])
+        else:
+            if answer:
+                test(sol.get(value[i][0]), answer[i])
+            else:
+                print(sol.get(value[i][0]))
