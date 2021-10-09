@@ -96,6 +96,7 @@ def test(my, ans):
     if my==ans: print(True)
     else:
         print(my, ans)
+        if ans==None: return
         if type(my)==list or type(my)==tuple:
             for i in range(min(len(my), len(ans))):
                 if my[i]!=ans[i]:
