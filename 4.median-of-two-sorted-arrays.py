@@ -19,10 +19,10 @@ class Solution:
             else: s2 = c2+1
             k -= s1-os1+s2-os2
         if s1==len(nums1):
-                if L%2: return nums2[s2+k]
-                return (nums2[s2+k-1]+nums2[s2+k])/2
+            if L%2: return nums2[s2+k]
+            return (nums2[s2+k-1]+nums2[s2+k])/2
         if s2==len(nums2):
-            if L%2: return nums1[s2+k]
+            if L%2: return nums1[s1+k]
             return (nums1[s1+k-1]+nums1[s1+k])/2
         if L%2:
             if nums1[s1]<nums2[s2]:
