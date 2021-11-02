@@ -15,3 +15,6 @@ if __name__ == "__main__":
     test(sol.solution('cbaabaab'),'baabaab')
     test(sol.solution('performance'),'erformance')
     test(sol.solution('cat'),'c')
+    test(sol.solution('asdfghjklka'),'asdfghjklka')
+    test(sol.solution('a'),'a')
+    test(sol.solution('abb'),'bb')
