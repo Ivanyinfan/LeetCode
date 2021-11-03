@@ -1,13 +1,16 @@
 from typing import List
-from collections import Counter
+from collections import defaultdict
 class Solution:
     def solution(self, A:List[str]) -> int:
-        counter,r,f = Counter(A),0,False
-        while len(counter)!=0:
-            k,v = counter.popitem()
-            if k[0]==k[1]: r,f=r+v//2*4, f or v%2
-            else: r = r + min(v, counter.pop(k[::-1],0))*4
-        if f: r = r + 2
+        map,r = defaultdict(int),0
+        for s in A:
+            rev = s[::-1]
+            if map[rev]>0: map[rev],r=map[rev]-1,r+4
+            else: map[s]=map[s]+1
+        for k, v in map.items():
+            if k==k[::-1] and v>0:
+                r = r + 2
+                break
         return r
 
 from utils import test
