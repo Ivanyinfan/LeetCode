@@ -92,16 +92,21 @@ def node2List(root:Node):
         if i: i=i.left if i.left else i.right
     return r1,r2
 
-def test(my, ans):
-    if my==ans: print(True)
-    else:
-        print(my, ans)
-        if ans==None: return
-        if type(my)==list or type(my)==tuple:
-            for i in range(min(len(my), len(ans))):
-                if my[i]!=ans[i]:
-                    print(i)
-                    break
+def test(my, answer, ordered=True):
+    if not ordered: my, answer = set(my), set(answer)
+    if my==answer:
+        print(True)
+        return
+    print(my, answer)
+    if answer==None: return
+    f = type(my)==list or type(my)==tuple   
+    if f and ordered:
+        for i in range(min(len(my), len(answer))):
+            if my[i]!=answer[i]:
+                print(i)
+                break
+        
+                
 
 class Solution51:
     def solveNQueens(self, n: int) -> List[List[str]]:
