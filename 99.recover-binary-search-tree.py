@@ -25,18 +25,16 @@ class Solution:
                 c = stack.pop()
                 if pre!=None and c.val<pre.val:
                     if first==None:
-                        first, second=c, pre
+                        first, second=pre, c
                     else:
                         second=c
                         break
-                    c = None
+                pre=c
+                if c.right:
+                    stack.append(c.right)
+                    c = c.right.left
                 else:
-                    pre=c
-                    if c.right:
-                        stack.append(c.right)
-                        c = c.right.left
-                    else:
-                        break
+                    c = None
             else:
                 stack.append(c)
                 c = c.left
@@ -47,4 +45,10 @@ class Solution:
 from utils import test
 if __name__ == "__main__":
     sol = Solution()
-    test(treeNode2List(sol.recoverTree(list2TreeNode([1,3,None,None,2]))),[3,1,None,None,2])
+    # test(treeNode2List(sol.recoverTree(list2TreeNode([1,3,None,None,2]))),[3,1,None,None,2])
+    test(treeNode2List(sol.recoverTree(list2TreeNode([3,1,4,None,None,2,None]))),[2,1,4,None,None,3])
+
+# Accepted
+# 1919/1919 cases passed (72 ms)
+# Your runtime beats 79.13 % of python3 submissions
+# Your memory usage beats 56.1 % of python3 submissions (14.6 MB)
