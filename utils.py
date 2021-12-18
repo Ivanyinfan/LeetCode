@@ -16,6 +16,10 @@ class Node:
         self.left = left
         self.right = right
         self.next = next
+        
+def getListNodeByVal(head:ListNode, val:int):
+    while head.val!=val: head=head.next
+    return head
 
 def list2ListNode(input:list)->ListNode:
     head = None
@@ -96,7 +100,7 @@ def test(my, answer, ordered=True):
     if not ordered: my, answer = set(my), set(answer)
     if my==answer:
         print(True)
-        return
+        return True
     print(my, answer)
     if answer==None: return
     f = type(my)==list or type(my)==tuple   
@@ -105,7 +109,7 @@ def test(my, answer, ordered=True):
             if my[i]!=answer[i]:
                 print(i)
                 break
-        
+    return False
                 
 
 class Solution51:
