@@ -111,6 +111,26 @@ def test(my, answer, ordered=True):
                 break
     return False
                 
+def KMP_Get_Next(s:str, improve:bool) -> List[int]:
+    re = [None]*len(s)
+    # j: last index, the current index is j+1
+    # k: next[j], last value of next, except the improvement back
+    re[0],j,k = -1,0,-1
+    while j<len(s)-1:
+        # k==-1 nothing to back, set the back to 0, -1 if same with s[0]
+        # s[j]==s[k] match success, s[j+1]=k+1, back again if same with s[k+1]
+        if k==-1 or s[j]==s[k]:
+            j,k = j+1,k+1
+            if improve and s[j]==s[k]:
+                re[j]=re[k]
+                # not back k here, because original k may be useful in the furture
+            else:
+                # because s[:k]==s[j-k:j]
+                re[j]=k
+        else:
+            # match fail, back k
+            k = re[k]
+    return re
 
 class Solution51:
     def solveNQueens(self, n: int) -> List[List[str]]:
