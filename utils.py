@@ -97,7 +97,14 @@ def node2List(root:Node):
     return r1,r2
 
 def test(my, answer, ordered=True):
-    if not ordered: my, answer = set(my), set(answer)
+    if not ordered:
+        if type(my)==list and my and type(my[0])==list:
+            for i, item in enumerate(my):
+                my[i] = tuple(item)
+        if type(answer)==list and answer and type(answer[0])==list:
+            for i, item in enumerate(answer):
+                answer[i] = tuple(item)
+        my, answer = set(my), set(answer)
     if my==answer:
         print(True)
         return True
