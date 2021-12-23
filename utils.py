@@ -104,12 +104,16 @@ def test(my, answer, ordered=True):
         if type(answer)==list and answer and type(answer[0])==list:
             for i, item in enumerate(answer):
                 answer[i] = tuple(item)
+        omy, oanswer = my, answer
         my, answer = set(my), set(answer)
+        if len(my)!=len(omy):
+            print(omy, oanswer)
+            return False
     if my==answer:
         print(True)
         return True
     print(my, answer)
-    if answer==None: return
+    if answer==None: return False
     f = type(my)==list or type(my)==tuple   
     if f and ordered:
         for i in range(min(len(my), len(answer))):
