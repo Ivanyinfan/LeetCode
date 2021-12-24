@@ -25,13 +25,15 @@ class Solution:
             path.append(s[index])
             self.backtrack(s,index+1,left_count+1,right_count,lRemove,rRemove,path,result)
             path.pop()
-            self.backtrack(s,index+1,left_count,right_count,lRemove-1,rRemove,path,result)
+            if lRemove>0:
+                self.backtrack(s,index+1,left_count,right_count,lRemove-1,rRemove,path,result)
         elif s[index]==')':
             if left_count>right_count:
                 path.append(s[index])
                 self.backtrack(s,index+1,left_count,right_count+1,lRemove,rRemove,path,result)
                 path.pop()
-            self.backtrack(s,index+1,left_count,right_count,lRemove,rRemove-1,path,result)
+            if rRemove>0:
+                self.backtrack(s,index+1,left_count,right_count,lRemove,rRemove-1,path,result)
         else:
             path.append(s[index])
             self.backtrack(s,index+1,left_count,right_count,lRemove,rRemove,path,result)
@@ -55,6 +57,6 @@ if __name__ == "__main__":
     test(sol.removeInvalidParentheses("(((()"),["()"],False)
 
 # Accepted
-# 127/127 cases passed (1320 ms)
-# Your runtime beats 43.34 % of python3 submissions
-# Your memory usage beats 75.2 % of python3 submissions (14.4 MB)
+# 127/127 cases passed (108 ms)
+# Your runtime beats 79.19 % of python3 submissions
+# Your memory usage beats 96.25 % of python3 submissions (14.1 MB)
