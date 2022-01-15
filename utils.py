@@ -1,3 +1,4 @@
+from itertools import count
 from typing import List
 class ListNode:
     def __init__(self, val=0, next=None):
@@ -142,6 +143,40 @@ def KMP_Get_Next(s:str, improve:bool) -> List[int]:
             # match fail, back k
             k = re[k]
     return re
+
+class UnionFind:
+    def __init__(self) -> None:
+        self.parent = dict()
+        self.count = 0
+        self.rank = dict()
+    
+    def find(self, x, add:bool=True):
+        if x not in self.parent:
+            if not add:
+                return None
+            self.count += 1
+            self.parent[x] = x
+            self.rank[x] = 1
+        if self.parent[x]!=x:
+            self.parent[x] = self.find(self.parent[x])
+        return self.parent[x]
+
+    def union(self, x, y):
+        xr, yr = self.find(x), self.find(y)
+        if xr!=yr:
+            rxr, ryr = self.rank[xr], self.rank[yr]
+            if rxr>=ryr:
+                self.parent[yr] = xr
+                self.rank.pop(yr)
+                if rxr==ryr:
+                    self.rank[xr] += 1
+            else:
+                self.parent[xr] = yr
+                self.rank.pop(xr)
+            self.count -= 1
+    
+    def getCount(self):
+        return self.count
 
 class Solution51:
     def solveNQueens(self, n: int) -> List[List[str]]:
