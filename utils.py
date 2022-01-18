@@ -97,6 +97,21 @@ def node2List(root:Node):
         if i: i=i.left if i.left else i.right
     return r1,r2
 
+read4_input = ''
+read4_index = 0
+def read4_init(input):
+    global read4_input, read4_index
+    read4_input = input
+    read4_index = 0
+
+def read4(buf4):
+    global read4_input, read4_index
+    i = 0
+    while read4_index<len(read4_input) and i<4:
+        buf4[i] = read4_input[read4_index]
+        i, read4_index = i+1, read4_index+1
+    return i
+
 def test(my, answer, ordered=True):
     if not ordered:
         if type(my)==list and my and type(my[0])==list:
