@@ -1,5 +1,6 @@
-from itertools import count
 from typing import List
+from collections import Counter
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -112,7 +113,7 @@ def read4(buf4):
         i, read4_index = i+1, read4_index+1
     return i
 
-def test(my, answer, ordered=True):
+def test(my, answer, ordered=True, duplicate=False):
     if not ordered:
         if type(my)==list and my and type(my[0])==list:
             for i, item in enumerate(my):
@@ -121,10 +122,13 @@ def test(my, answer, ordered=True):
             for i, item in enumerate(answer):
                 answer[i] = tuple(item)
         omy, oanswer = my, answer
-        my, answer = set(my), set(answer)
-        if len(my)!=len(omy):
-            print(omy, oanswer)
-            return False
+        if duplicate:
+            my, answer = Counter(my), Counter(answer)
+        else:
+            my, answer = set(my), set(answer)
+            if len(my)!=len(omy):
+                print(omy, oanswer)
+                return False
     if my==answer:
         print(True)
         return True
