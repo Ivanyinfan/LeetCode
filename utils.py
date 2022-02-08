@@ -29,6 +29,24 @@ def list2ListNode(input:list)->ListNode:
         head = ListNode(num, head)
     return head
 
+def List2CircularListNode(input:list) -> ListNode:
+    head = list2ListNode(input)
+    if head == None: return head
+    tail = head
+    while tail.next: tail = tail.next
+    tail.next = head
+    return head
+
+def CircularListNode2List(head:ListNode) -> ListNode:
+    r = list()
+    if not head: return r
+    i = head
+    while True:
+        r.append(i.val)
+        i = i.next
+        if i==head: break
+    return r
+
 def listNode2List(head:ListNode):
     r = list()
     i = head
